@@ -23,7 +23,7 @@ class TabelaCustaController extends Controller
      */
     public function index()
     {
-        $data = $this->custas->where('ativo', 'S')->get();
+        $data = $this->custas->where('ativo', 'S')->orderBy('descricao_servico')->get();
 
         return response()->json(['data' => $data]);
     }

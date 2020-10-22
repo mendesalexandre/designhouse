@@ -12,13 +12,15 @@
       <tbody>
         <tr v-for="(custa, index) in custas.data" :key="index">
           <td>{{ custa.id }}</td>
-          <td>{{ custa.descricao }}</td>
+          <td>{{ custa.descricao_servico }}</td>
           <td>
-            <router-link :to="{ name: 'custas' }" class="btn btn-primary"
+            <!-- <router-link :to="{ name: 'custas' }" class="btn btn-primary"
               >Editar</router-link
-            >
-            <router-link :to="{ name: 'custas' }" class="btn btn-primary"
-              >Desativar</router-link
+            > -->
+            <router-link
+              :to="{ name: 'custas.edit', params: { id: custa.id } }"
+              class="btn btn-primary"
+              >Editar</router-link
             >
           </td>
         </tr>
@@ -32,22 +34,18 @@ import axios from "axios";
 
 export default {
   created() {
-    this.loadCustas();
+    this.$store.dispatch("loadCustas");
   },
-  data() {
-    return {
-      custas: [],
-    };
-  },
-  methods: {
-    loadCustas() {
-      axios
-        .get("http://localhost/projetos/laravel/mjsistema/public/api/v1/custas")
-        .then((response) => {
-          this.custas = response.data;
-        })
-        .catch((error) => {});
+  computed: {
+    custas() {
+      return this.$store.state.custas.items;
     },
   },
+  // data() {
+  //   return {
+  //     // custas: [],
+  //   };
+  // },
+  methods: {},
 };
 </script>

@@ -12,6 +12,10 @@ use Illuminate\Support\Facades\Route;
 // })->where('any', '^(?!api\/)[\/\w\.\,-]*');
 
 
-Route::get('/{any}', function () {
-    return view('app');
-})->where('any', '.*');
+// Route::get('/{any}', function () {
+//     return view('app');
+// })->where('any', '.*');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

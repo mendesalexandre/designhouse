@@ -13,11 +13,13 @@ class CreateTabelaCustaTable extends Migration
      */
     public function up()
     {
-        Schema::create('tabela_custas', function (Blueprint $table) {
+        Schema::create('tabela_custa', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('ativo')->default('S');
             $table->bigInteger('codigo')->unsigned()->nullable();
             $table->bigInteger('codigo_tj')->unsigned()->nullable();
-            $table->string('descricao')->nullable();
+            $table->bigInteger('codigo_tj_relacionado')->unsigned()->nullable();
+            $table->string('descricao_servico')->nullable();
             $table->float('emolumentos')->nullable();
             $table->float('registro_civil')->nullable();
             $table->float('judiciario')->nullable();
@@ -29,9 +31,8 @@ class CreateTabelaCustaTable extends Migration
             $table->float('valor_gatilho_inicial')->nullable();
             $table->float('valor_gatilho_final')->nullable();
             $table->text('acessa_referencia')->nullable();
-            $table->text('selo_digital')->nullable();
-            $table->bigInteger('codigo_tj_relacionado')->unsigned()->nullable();
-            $table->text('ato_referenciado')->default('S');
+            $table->text('selo_digital')->default('S');
+            $table->string('ato_relacionado')->nullable();
             $table->float('percentual_issqn')->nullable();
             $table->timestamps();
         });
@@ -44,6 +45,6 @@ class CreateTabelaCustaTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tabela_custas');
+        Schema::dropIfExists('tabela_custa');
     }
 }

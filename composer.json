@@ -9,17 +9,18 @@
     "license": "MIT",
     "require": {
         "php": "^7.2",
+        "barryvdh/laravel-dompdf": "^0.8.7",
         "fideloper/proxy": "^4.0",
         "laravel/framework": "^6.18.35",
         "laravel/tinker": "^2.0",
-        "tymon/jwt-auth": "^1.0",
+        "nfephp-org/sped-mail": "^0.1",
         "nfephp-org/sped-nfe": "^5.0",
-        "nfephp-org/sped-mail": "^0.1"
+        "tymon/jwt-auth": "^1.0"
     },
     "require-dev": {
         "facade/ignition": "^1.4",
         "fzaninotto/faker": "^1.9.1",
-        "laravel/ui": "^1.2",
+        "laravel/ui": "^1.0",
         "mockery/mockery": "^1.0",
         "nunomaduro/collision": "^3.0",
         "phpunit/phpunit": "^8.0"

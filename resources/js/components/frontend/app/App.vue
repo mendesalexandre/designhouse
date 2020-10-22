@@ -13,7 +13,18 @@
             >
           </li>
           <li>
-            <router-link :to="{ name: 'custas' }">Tabela de Custas</router-link>
+            <router-link :to="{ name: 'custas' }"
+              >Tabela de Custas ({{ totalCustas }})</router-link
+            >
+          </li>
+          <li>
+            <router-link :to="{ name: 'cliente.index' }">Clientes </router-link>
+          </li>
+
+          <li>
+            <router-link :to="{ name: 'cliente.index' }"
+              >Ordem de Serviço
+            </router-link>
           </li>
         </ul>
       </div>
@@ -26,5 +37,11 @@
   </div>
 </template>
 <script>
-export default {};
+export default {
+  computed: {
+    totalCustas() {
+      return this.$store.state.custas.items.data.length;
+    },
+  },
+};
 </script>

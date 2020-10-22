@@ -11,6 +11,7 @@
 
 <body>
     <div id="app">
+        <preloader-component></preloader-component>
         <router-view></router-view>
     </div>
     <script src="{{asset('js/app.js')}}"></script>

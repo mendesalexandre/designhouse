@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\VerifiesEmails;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\URL;
 
 class VerificationController extends Controller
 {
@@ -22,21 +25,28 @@ class VerificationController extends Controller
     use VerifiesEmails;
 
     /**
-     * Where to redirect users after verification.
-     *
-     * @var string
-     */
-    protected $redirectTo = RouteServiceProvider::HOME;
-
-    /**
      * Create a new controller instance.
      *
      * @return void
      */
     public function __construct()
     {
-        $this->middleware('auth');
         $this->middleware('signed')->only('verify');
         $this->middleware('throttle:6,1')->only('verify', 'resend');
+    }
+
+    public function verify(Request $request, User $user)
+    {
+        //check if the url is a vald signed url
+        if (!URL::hasValidSignature($request)) {
+
+            return response()->json(["errors" => [
+                "message" => "Invalid verification link"
+            ]], 422);
+        }
+    }
+
+    public function resend(Request $request)
+    {
     }
 }
