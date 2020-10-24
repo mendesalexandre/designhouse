@@ -2,27 +2,25 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
 use App\Models\User;
-use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 // use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Http\Request;
+use Illuminate\Foundation\Auth\RegistersUsers;
 
 class RegisterController extends Controller
 {
     use RegistersUsers;
 
+    protected $users;
 
-    /**
-     * The user has been registered.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  mixed  $user
-     * @return mixed
-     * 
-     */
+    public function __construct(User $users)
+    {
+        $this->users = $users;
+    }
+
     protected function registered(Request $request, User $user)
     {
         return response()->json($user, 200);
@@ -44,15 +42,9 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\Models\User
      */
-
-    //  Don't working with return in array
-    // Change to Request and... workint but the validation no. 
-    // Whats happend, is the Laravel version ? 
-
-    protected function register(array $data) // Don't working
-    // protected function register(Request $data) // Working, but not validator method
+    protected function create(array $data)
     {
-        return User::create([
+        return $this->users->create([
             'username' => $data['username'],
             'name' => $data['name'],
             'email' => $data['email'],

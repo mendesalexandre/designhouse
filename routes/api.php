@@ -2,8 +2,15 @@
 
 use Illuminate\Support\Facades\Route;
 
+Route::group(['middleware' => ['auth:api']], function () {
+    Route::post('logout', 'Auth\LoginController@logout');
+});
+
 Route::group(['middleware' => ['guest:api']], function () {
-    Route::post('register', 'Auth\\RegisterController@register');
+    Route::post('register', 'Auth\\RegisterController@register')->name('register');
+    Route::post('verification/verify/{user}', 'Auth\\VerificationController@verify')->name('verification.verify');
+    Route::post('verification/resend', 'Auth\\VerificationController@resend');
+    Route::post('login', 'Auth\\LoginController@login')->name('login');
 });
 
 // Route::group(['prefix' => 'v1', 'namespace' => 'Api', 'as' => 'api.'], function () {

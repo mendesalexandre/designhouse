@@ -13,6 +13,7 @@
         "fideloper/proxy": "^4.0",
         "laravel/framework": "^6.18.35",
         "laravel/tinker": "^2.0",
+        "lucascudo/laravel-pt-br-localization": "^1.1",
         "nfephp-org/sped-mail": "^0.1",
         "nfephp-org/sped-nfe": "^5.0",
         "tymon/jwt-auth": "^1.0"
