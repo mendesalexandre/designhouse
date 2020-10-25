@@ -47,7 +47,7 @@ class LoginController extends Controller
         $this->clearLoginAttempts($request);
 
         // get the token from the authentication guard(JWT)
-        $token = (string)$this->guard()->getToken();
+        $token = (string) $this->guard()->getToken();
 
         // extract the expiry date of the token
         $expiration = $this->guard()->getPayload()->get('exp');

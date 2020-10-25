@@ -2,8 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 
+// Public Routes
+Route::get('me', 'User\\MeController@getMe');
+
 Route::group(['middleware' => ['auth:api']], function () {
-    Route::post('logout', 'Auth\LoginController@logout');
+    Route::post('logout', 'Auth\\LoginController@logout');
 });
 
 Route::group(['middleware' => ['guest:api']], function () {
