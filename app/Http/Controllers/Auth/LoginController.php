@@ -11,14 +11,7 @@ use Illuminate\Validation\ValidationException;
 
 class LoginController extends Controller
 {
-
     use AuthenticatesUsers;
-
-    // public function doLogin(Request $request)
-    // {
-    //     $data = $request->only('email', 'senha');
-    // }
-
 
     public function attemptLogin(Request $request)
     {
@@ -61,7 +54,7 @@ class LoginController extends Controller
         );
     }
 
-    protected function sendFailedLoginResponse(Request $request)
+    protected function sendFailedLoginResponse()
     {
         $user = $this->guard()->user();
 
@@ -71,11 +64,11 @@ class LoginController extends Controller
                     "verification" => "You need to verify your email account."
                 ]]
             );
-
-            throw ValidationException::withMessages([
-                $this->username() => "Authentication failed"
-            ]);
         }
+
+        throw ValidationException::withMessages([
+            $this->username() => "Authentication failed"
+        ]);
     }
 
     public function logout()
